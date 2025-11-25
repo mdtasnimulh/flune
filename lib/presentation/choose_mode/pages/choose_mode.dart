@@ -3,6 +3,7 @@ import 'package:flune/common/widgets/button/basic_app_button.dart';
 import 'package:flune/core/configs/assets/app_images.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
 import 'package:flune/core/configs/theme/app_colors.dart';
+import 'package:flune/presentation/auth/pages/signup_or_signin.dart';
 import 'package:flune/presentation/choose_mode/bloc/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -139,7 +140,12 @@ class ChooseModePage extends StatelessWidget {
                 SizedBox(height: 50),
                 BasicAppButton(
                   onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => SignupOrSignInScreen()
+                      )
+                    );
                   },
                   title: 'Continue',
                 )
