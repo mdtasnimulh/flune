@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "102121378536",
+    "project_id": "flune-107",
+    "storage_bucket": "flune-107.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102121378536:android:a5bbb061fd794ddee02f5d",
+        "android_client_info": {
+          "package_name": "com.tasnimulhasan.flune.flune"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6F85odFmdIGfXiQblA-8CoriyyUv0X7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,6 +17,7 @@ dependencies:
   flutter_bloc:
   hydrated_bloc:
   path_provider:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
@@ -49,3 +50,6 @@ flutter:
         - asset: assets/fonts/Roboto-Italic.ttf
           weight: 400
           style: italic
+
+          #android   1:102121378536:android:a5bbb061fd794ddee02f5d
+          #ios       1:102121378536:ios:2ae1d27c2be3b790e02f5d
