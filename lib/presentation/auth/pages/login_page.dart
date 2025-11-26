@@ -1,12 +1,20 @@
 import 'package:flune/common/widgets/appbar/app_bar.dart';
 import 'package:flune/common/widgets/button/basic_app_button.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
+import 'package:flune/data/models/auth/sign_in_user_req.dart';
+import 'package:flune/domain/usecases/auth/sign_in_usecase.dart';
 import 'package:flune/presentation/auth/pages/signup_page.dart';
+import 'package:flune/presentation/root/pages/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../service_locator.dart';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +22,7 @@ class LoginPage extends StatelessWidget {
       appBar: BasicAppBar(
         title: SvgPicture.asset(AppVectors.logo, height: 40, width: 40),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,7 +33,33 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 12),
             _passwordField(context),
             SizedBox(height: 18),
-            BasicAppButton(onPressed: () {}, title: 'Login'),
+            BasicAppButton(
+                onPressed: () async {
+                  var result = await serviceLocator<SignInUseCase>().call(
+                      params: SignInUserReq(
+                          email: _email.text.toString(),
+                          password: _password.text.toString()
+                      )
+                  );
+
+                  result.fold(
+                      (ifLeft) {
+                        var snackBar = SnackBar(content: Text(ifLeft));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      (ifRight) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => const RootPage()
+                            ),
+                            (route) => false
+                        );
+                      }
+                  );
+                },
+                title: 'Login'
+            ),
           ],
         ),
       ),
@@ -43,6 +77,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _emailField(BuildContext context) {
     return TextField(
+      controller: _email,
       decoration: InputDecoration(
         hintText: 'Enter Username Or Email',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
@@ -51,6 +86,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _passwordField(BuildContext context) {
     return TextField(
+      controller: _password,
       decoration: InputDecoration(
         hintText: 'Password',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
