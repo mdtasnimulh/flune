@@ -4,7 +4,7 @@ import 'package:flune/core/configs/assets/app_vectors.dart';
 import 'package:flune/data/models/auth/sign_in_user_req.dart';
 import 'package:flune/domain/usecases/auth/sign_in_usecase.dart';
 import 'package:flune/presentation/auth/pages/signup_page.dart';
-import 'package:flune/presentation/root/pages/root.dart';
+import 'package:flune/presentation/home/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,7 +51,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => const RootPage()
+                                builder: (BuildContext context) => const HomePage()
                             ),
                             (route) => false
                         );

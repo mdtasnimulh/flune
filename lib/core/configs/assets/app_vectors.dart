@@ -7,4 +7,5 @@ class AppVectors {
   static const String darkMode = '${basePath}dark_mode$format';
   static const String signInTop = '${basePath}vector_top$format';
   static const String signInBottom = '${basePath}vector_bottom$format';
+  static const String homeTopCard = '${basePath}home_top_card$format';
 }

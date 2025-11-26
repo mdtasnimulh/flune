@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flune/core/configs/theme/app_theme.dart';
 import 'package:flune/presentation/choose_mode/bloc/theme_cubit.dart';
+import 'package:flune/presentation/home/pages/home.dart';
 import 'package:flune/presentation/splash/pages/spash.dart';
 import 'package:flune/service_locator.dart';
 import 'package:flutter/foundation.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: mode,
           debugShowCheckedModeBanner: false,
-          home: const SplashPage(),
+          home: const HomePage(), //SplashPage()
         ),
       ),
     );
