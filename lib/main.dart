@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flune/core/configs/theme/app_theme.dart';
 import 'package:flune/presentation/choose_mode/bloc/theme_cubit.dart';
 import 'package:flune/presentation/splash/pages/spash.dart';
+import 'package:flune/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform
   );
+
+  await initializeDependencies();
   runApp(MyApp());
 }
 

@@ -1,12 +1,20 @@
 import 'package:flune/common/widgets/appbar/app_bar.dart';
 import 'package:flune/common/widgets/button/basic_app_button.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
+import 'package:flune/data/models/auth/create_user_req.dart';
+import 'package:flune/domain/usecases/auth/signup_usecase.dart';
 import 'package:flune/presentation/auth/pages/login_page.dart';
+import 'package:flune/presentation/root/pages/root.dart';
+import 'package:flune/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+  SignupPage({super.key});
+
+  final TextEditingController _fullName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,34 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 12),
             _passwordField(context),
             SizedBox(height: 18),
-            BasicAppButton(onPressed: () {}, title: 'Create Account'),
+            BasicAppButton(
+                onPressed: () async {
+                  var result = await serviceLocator<SignupUseCase>().call(
+                    params: CreateUserReq(
+                        fullName: _fullName.text.toString(),
+                        email: _email.text.toString(),
+                        password: _password.text.toString()
+                    )
+                  );
+
+                  result.fold(
+                      (ifLeft) {
+                        var snackBar = SnackBar(content: Text(ifLeft));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      (ifRight) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => const RootPage()
+                          ),
+                          (route) => false
+                        );
+                      }
+                  );
+                },
+                title: 'Create Account'
+            ),
           ],
         ),
       ),
@@ -45,6 +80,7 @@ class SignupPage extends StatelessWidget {
 
   Widget _fullNameField(BuildContext context) {
     return TextField(
+      controller: _fullName,
       decoration: InputDecoration(
         hintText: 'Full Name',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
@@ -53,6 +89,7 @@ class SignupPage extends StatelessWidget {
 
   Widget _emailField(BuildContext context) {
     return TextField(
+      controller: _email,
       decoration: InputDecoration(
         hintText: 'Enter Email',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
@@ -61,6 +98,7 @@ class SignupPage extends StatelessWidget {
 
   Widget _passwordField(BuildContext context) {
     return TextField(
+      controller: _password,
       decoration: InputDecoration(
         hintText: 'Password',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
