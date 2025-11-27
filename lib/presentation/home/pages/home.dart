@@ -3,6 +3,7 @@ import 'package:flune/common/widgets/appbar/app_bar.dart';
 import 'package:flune/core/configs/assets/app_images.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
 import 'package:flune/core/configs/theme/app_colors.dart';
+import 'package:flune/presentation/home/widgets/new_songs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -39,7 +40,20 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           children: [
             _homeTopCard(),
             SizedBox(height: 12,),
-            _tabs()
+            _tabs(),
+            SizedBox(height: 12,),
+            SizedBox(
+              height: 260,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  NewSongs(),
+                  Container(),
+                  Container(),
+                  Container()
+                ],
+              ),
+            ),
           ],
         ),
       ),

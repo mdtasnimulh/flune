@@ -8,7 +8,7 @@ class SignInUseCase implements UseCase<Either,SignInUserReq>{
 
   @override
   Future<Either> call({SignInUserReq ? params}) async {
-    return serviceLocator<AuthRepository>().signIn(params!);
+    return await serviceLocator<AuthRepository>().signIn(params!);
   }
 
 }
