@@ -37,65 +37,70 @@ class NewSongs extends StatelessWidget {
   }
 
   Widget _songs(List<SongEntity> songs) {
-    return ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return SizedBox(
-          width: 160,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        songs[index].coverUrl
-                      )
-                    )
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        itemCount: songs.length,
+        itemBuilder: (context, index) {
+          final song = songs[index];
+          return Padding(
+            padding: EdgeInsets.only(
+              right: index == songs.length - 1 ? 0 : 16,
+            ),
+            child: SizedBox(
+              width: 160,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
                     child: Container(
-                      width: 40,
-                      height: 40,
-                      transform: Matrix4.translationValues(10, 10, 0),
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: context.isDarkMode ? AppColors.darkGrey : AppColors.lightGrey
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(song.coverUrl),
+                        ),
                       ),
-                      child: Icon(
-                        Icons.play_arrow_rounded,
-                        color: context.isDarkMode ? AppColors.greyLighter : AppColors.greyDarker,
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          transform: Matrix4.translationValues(10, 10, 0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: context.isDarkMode ? AppColors.darkGrey : AppColors.lightGrey,
+                          ),
+                          child: Icon(
+                            Icons.play_arrow_rounded,
+                            color: context.isDarkMode ? AppColors.greyLighter : AppColors.greyDarker,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  Text(
+                    song.title,
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    song.artist,
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Colors.grey),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
-              SizedBox(height: 12,),
-              Text(
-                songs[index].title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(height: 8,),
-              Text(
-                songs[index].artist,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => SizedBox(width: 16,),
-      itemCount: songs.length,
+            ),
+          );
+        },
+      ),
     );
   }
 }
