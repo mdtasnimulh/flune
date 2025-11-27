@@ -7,6 +7,7 @@ import 'package:flune/domain/repository/song/song.dart';
 import 'package:flune/domain/usecases/auth/sign_in_usecase.dart';
 import 'package:flune/domain/usecases/auth/signup_usecase.dart';
 import 'package:flune/domain/usecases/song/get_new_songs_use_case.dart';
+import 'package:flune/domain/usecases/song/get_song_list_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance;
@@ -39,6 +40,10 @@ Future<void> initializeDependencies() async {
 
   serviceLocator.registerSingleton<GetNewSongsUseCase>(
     GetNewSongsUseCase()
+  );
+
+  serviceLocator.registerSingleton<GetSongListUseCase>(
+    GetSongListUseCase()
   );
 
 }

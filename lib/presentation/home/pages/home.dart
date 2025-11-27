@@ -4,6 +4,7 @@ import 'package:flune/core/configs/assets/app_images.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
 import 'package:flune/core/configs/theme/app_colors.dart';
 import 'package:flune/presentation/home/widgets/new_songs.dart';
+import 'package:flune/presentation/home/widgets/song_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -54,6 +55,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 ],
               ),
             ),
+            SizedBox(height: 16,),
+            SongList()
           ],
         ),
       ),
@@ -102,7 +105,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
       tabs: [
         const Text(
-          'News',
+          'New',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16

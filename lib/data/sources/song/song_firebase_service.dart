@@ -5,6 +5,7 @@ import 'package:flune/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either> getNewSongs();
+  Future<Either> getSongList();
 }
 
 class SongFirebaseServiceImpl extends SongFirebaseService {
@@ -15,7 +16,7 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
       var data = await FirebaseFirestore.instance
           .collection('Songs')
           .orderBy('releaseDate', descending: true)
-          .limit(5)
+          .limit(3)
           .get();
 
       for (var element in data.docs) {
@@ -24,6 +25,26 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
       }
 
       return Right(songs);
+    } catch (e) {
+      return const Left('An Error Occurred, Please Try Again');
+    }
+  }
+
+  @override
+  Future<Either> getSongList() async {
+    try {
+      List<SongEntity> songList = [];
+      var data = await FirebaseFirestore.instance
+          .collection('Songs')
+          .orderBy('releaseDate', descending: true)
+          .get();
+
+      for (var element in data.docs) {
+        var songModel = SongModel.fromJson(element.data());
+        songList.add(songModel.toEntity());
+      }
+
+      return Right(songList);
     } catch (e) {
       return const Left('An Error Occurred, Please Try Again');
     }
