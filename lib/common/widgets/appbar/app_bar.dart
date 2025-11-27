@@ -1,4 +1,5 @@
 import 'package:flune/common/helpers/is_dark_mode.dart';
+import 'package:flune/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -37,7 +38,27 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
                   size: 24,
                 ),
               )
-          )
+          ),
+        actions: [
+          IconButton(
+              onPressed: () {
+
+              },
+              icon: Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    shape: BoxShape.circle
+                ),
+                child: Icon(
+                  Icons.more_vert,
+                  size: 24,
+                  color: AppColors.darkGrey,
+                ),
+              )
+          ),
+        ],
       ),
     );
   }
