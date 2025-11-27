@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flune/core/configs/assets/app_vectors.dart';
+import 'package:flune/core/configs/theme/app_colors.dart';
 import 'package:flune/presentation/intro/pages/get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,9 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             SvgPicture.asset(AppVectors.logo),
             const SizedBox(height: 32),
-            const CircularProgressIndicator(),
+            const CircularProgressIndicator(
+              color: AppColors.primary,
+            ),
           ],
         ),
       ),

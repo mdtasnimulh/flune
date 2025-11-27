@@ -19,7 +19,9 @@ class NewSongs extends StatelessWidget {
           builder: (context, state) {
             if (state is NewSongsLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: AppColors.primary,
+                ),
               );
             }
 
