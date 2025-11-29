@@ -6,6 +6,8 @@ import 'package:flune/presentation/home/bloc/song_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../player/pages/player_screen.dart';
+
 class SongList extends StatelessWidget {
   const SongList({super.key});
 
@@ -76,81 +78,93 @@ class SongList extends StatelessWidget {
       itemBuilder: (context, index) {
         final song = songs[index];
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: context.isDarkMode ? AppColors.darkGrey : AppColors.lightGrey,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      song.coverUrl
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => PlayerScreen(
+                      songEntity: song,
                     )
-                  )
+                )
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: context.isDarkMode ? AppColors.darkGrey : AppColors.lightGrey,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        song.coverUrl
+                      )
+                    )
+                  ),
+                  child: Icon(
+                    Icons.play_arrow_rounded,
+                    size: 40,
+                    color: AppColors.greyDarker,
+                  ),
                 ),
-                child: Icon(
-                  Icons.play_arrow_rounded,
-                  size: 40,
-                  color: AppColors.greyDarker,
-                ),
-              ),
 
-              const SizedBox(width: 16),
+                const SizedBox(width: 16),
 
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      song.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        song.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      song.artist,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: Colors.grey,
+                      const SizedBox(height: 4),
+                      Text(
+                        song.artist,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          color: Colors.grey,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
-              const SizedBox(width: 12),
+                const SizedBox(width: 12),
 
-              Text(
-                song.duration.toString(),
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
+                Text(
+                  song.duration.toString(),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
 
-              const SizedBox(width: 16),
+                const SizedBox(width: 16),
 
-              IconButton(
-                icon: Icon(
-                  Icons.favorite_outline_outlined,
-                  color: AppColors.greyDarker,
+                IconButton(
+                  icon: Icon(
+                    Icons.favorite_outline_outlined,
+                    color: AppColors.greyDarker,
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
