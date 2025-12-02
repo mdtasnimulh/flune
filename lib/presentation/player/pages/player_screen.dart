@@ -47,7 +47,7 @@ class PlayerScreen extends StatelessWidget {
       
       body: BlocProvider(
         create: (_) => MusicPlayerCubit()..loadMusic(
-          AppUrls.dummyMusicUrl
+          songEntity.musicUrl
         ),
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),

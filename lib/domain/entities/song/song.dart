@@ -6,6 +6,7 @@ class SongEntity {
   final String coverUrl;
   final num duration;
   final Timestamp releaseDate;
+  final String musicUrl;
 
   SongEntity({
     required this.title,
@@ -13,5 +14,6 @@ class SongEntity {
     required this.coverUrl,
     required this.duration,
     required this.releaseDate,
+    required this.musicUrl
   });
 }
